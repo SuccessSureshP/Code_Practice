@@ -1,0 +1,34 @@
+﻿You can detect cycles in directed graphs by using the DFS algorithm. (Depth-first-search)
+
+For example consider the following directed graph with the vertices A,B,C,D,E,F,G,H:
+
+C->B
+ B->A
+ C->D
+ D->E
+ D->G
+ E->F
+ F->G
+ G->H
+ H->D
+
+I guess you want to graph this on a piece of paper ;)
+
+Let's say that every vertice is marked as "white".
+ We can only move to "white" vertices from now on.
+
+Now, let's assume our DFS algorithm starts at C (to keep it simple).
+
+We mark C as "gray" and move to B.
+ We mark B as "gray" and move to A.
+ We mark A as "gray" and we can't get any further here, so we mark A as "black" and move back to B which we will also mark as "black", since there is no way away from B other than moving to A again which is already "black".
+ Now, we move back to C which we will leave "gray", since there is still an open way away from C. We move from C to D.
+ We mark D as "gray" and move to E.
+ We mark E as "gray" and move to F.
+ We mark F as "gray" and move to G.
+ We mark G as "gray" and move to H.
+ We mark H as "gray" and move to D, which is "GRAY". This means that D is part of the actual path that is being considered by our DFS algorithm. We found a circle!!! This means that whenever we find a vertice (by moving forward) which is marked "gray" we have a cycle, and we then can terminate with return value "true" or whatever ;)
+
+This is supposed to be a short example, you should read over some more detailed description of DFS if you don't understand this. Every vertice in DFS has 3 states, "white", "gray" or "black". You can also say "not processed", "being processed", "processed" or whatever...it's up to you.
+
+This algorithm also works if a directed graph is not strongly connected.
